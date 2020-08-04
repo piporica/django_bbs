@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{post.title}}</title>
+</head>
+<body>
+
+<h1>{{post.title}}</h1>
+<h4>작성자 : {{post.author}} | 작성날짜 : {{post.date}} | 조회수 : {{post.views}} | 좋아요:{{post.likes}}/싫어요:{{post.dislikes}} | </h4>
+<div><p>
+    {{post.contents}}
+</p></div>
+
+<br><br><br>
+<h4>comments</h4>
+{% for c in comments%}
+<div>
+    <h4>{{forloop.counter}} / {{c.author}}</h4>
+    <p>{{c.contents}}</p>
+</div>
+{% endfor %}
+
+</body>
+</html>
