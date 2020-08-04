@@ -7,12 +7,17 @@
 <body>
 
 <h1>{{post.title}}</h1>
-<h4>작성자 : {{post.author}} | 작성날짜 : {{post.date|date:'y년 m월 d일'}}} | 조회수 : {{post.views}} | 좋아요:{{post.likes}}/싫어요:{{post.dislikes}} | </h4>
+<h4>작성자 : {{post.author}} | 작성날짜 : {{post.date|date:'y년 m월 d일'}} | 조회수 : {{post.views}} | 좋아요:{{post.likes}}/싫어요:{{post.dislikes}} | </h4>
 <div><textarea cols="122" rows="20" name="content" disabled >{{post.contents}}
 </textarea></div>
 
 <br>
-<input type="button" value="좋아요"><input type="button" value="싫어요"><br>
+
+<form action="{% url 'bbs:like' post.id %}" method="POST">
+    {% csrf_token %}
+<input type="submit" name="like" value="좋아요"><input type="submit" name="like" value="싫어요"><br>
+</form>
+
 <h4>comments</h4>
 <form action="{% url 'bbs:comment_write' post.id %}" method="POST">
     {% csrf_token %}

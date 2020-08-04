@@ -42,3 +42,13 @@ def post_write(request):
 
 def post_form(request):
     return render(request, 'post_form.html')
+
+def post_like(request, p_num):
+    now_post = get_object_or_404(Post, pk=p_num)
+    if request.POST['like'] == '좋아요':
+        now_post.likes += 1
+    else:
+        now_post.dislikes += 1
+    now_post.save()
+
+    return redirect("/"+str(p_num))
