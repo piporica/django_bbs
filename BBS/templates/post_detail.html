@@ -7,13 +7,21 @@
 <body>
 
 <h1>{{post.title}}</h1>
-<h4>작성자 : {{post.author}} | 작성날짜 : {{post.date}} | 조회수 : {{post.views}} | 좋아요:{{post.likes}}/싫어요:{{post.dislikes}} | </h4>
-<div><p>
-    {{post.contents}}
-</p></div>
+<h4>작성자 : {{post.author}} | 작성날짜 : {{post.date|date:'y년 m월 d일'}}} | 조회수 : {{post.views}} | 좋아요:{{post.likes}}/싫어요:{{post.dislikes}} | </h4>
+<div><textarea cols="122" rows="20" name="content" disabled >{{post.contents}}
+</textarea></div>
 
-<br><br><br>
+<br>
+<input type="button" value="좋아요"><input type="button" value="싫어요"><br>
 <h4>comments</h4>
+<form action="{% url 'bbs:comment_write' post.id %}" method="POST">
+    {% csrf_token %}
+    작성자 : <textarea cols="30" rows="1" name="a"></textarea> <br>
+    내용 : &nbsp&nbsp <textarea cols="80" rows="5" name="c"></textarea>
+    <input type="submit" value="댓글작성!">
+</form>
+
+<br>
 {% for c in comments%}
 <div>
     <h4>{{forloop.counter}} / {{c.author}}</h4>

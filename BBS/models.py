@@ -8,7 +8,7 @@ if 게시판을 만든다면?
 
 class Post (models.Model):
     title = models.CharField('제목', max_length=100)
-    author = models.CharField('글쓴이', max_length=15)
+    author = models.CharField('글쓴이', max_length=15, null=True)
     date = models.DateTimeField('작성날짜', auto_now_add=True)
     views = models.IntegerField('조회수', default=0)
     likes = models.IntegerField('좋아요', default=0)
